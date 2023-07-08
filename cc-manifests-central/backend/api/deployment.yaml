@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: happy-api-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: happy-api-svc
+  template:
+    metadata:
+      labels:
+        app: happy-api-svc
+    spec:
+      containers:
+        - name: happy-api-svc
+          image: syahdaromstudenttelu/happy-api-svc
+          ports:
+            - containerPort: 55000
+          env:
+            - name: APP_ENV
+              value: 'prod'
+            - name: HAPPY_USER_SERVICE_URL
+              value: 'http://happy-user-svc:55000'
+            - name: HAPPY_PRODUCT_SERVICE_URL
+              value: 'http://happy-product-svc:55000'
+            - name: HAPPY_ORDER_SERVICE_URL
+              value: 'http://happy-order-svc:55000'
+            - name: HAPPY_FEEDBACK_SERVICE_URL
+              value: 'http://happy-feedback-svc:55000'
+            - name: JWT_SECRET_KEY
+              value: 'secret_api'
+            - name: ALLOW_ORIGINS
+              value: 'http://0.0.0.0'
+            - name: SERVER_ADDR
+              value: ':55000'
+          resources:
+            limits:
+              cpu: 50m
+              memory: 75Mi
+            requests:
+              cpu: 20m
+              memory: 25Mi

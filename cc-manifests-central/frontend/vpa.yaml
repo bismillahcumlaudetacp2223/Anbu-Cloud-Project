@@ -1,0 +1,12 @@
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: happy-web-app-deployment
+  namespace: default
+spec:
+  targetRef:
+    kind: Deployment
+    name: happy-web-app-deployment
+    apiVersion: apps/v1
+  updatePolicy:
+    updateMode: 'Off'

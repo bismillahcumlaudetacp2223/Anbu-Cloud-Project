@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: happy-admin-svc
+  labels:
+    app: happy-admin-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: happy-admin-svc
+  template:
+    metadata:
+      labels:
+        app: happy-admin-svc
+    spec:
+      containers:
+        - name: happy-admin-svc
+          image: syahdaromstudenttelu/happy-admin-svc
+          ports:
+            - containerPort: 55000
+          env:
+            - name: APP_ENV
+              value: 'prod'
+            - name: ADMIN_UNAME
+              value: 'admin'
+            - name: ADMIN_PASS
+              value: 'admin123'
+            - name: HAPPY_USER_SERVICE_URL
+              value: 'http://happy-user-svc:55000'
+            - name: HAPPY_PRODUCT_SERVICE_URL
+              value: 'http://happy-product-svc:55000'
+            - name: HAPPY_ORDER_SERVICE_URL
+              value: 'http://happy-order-svc:55000'
+            - name: HAPPY_FEEDBACK_SERVICE_URL
+              value: 'http://happy-feedback-svc:55000'
+            - name: ALLOW_ORIGINS
+              value: 'http://0.0.0.0'
+            - name: SERVER_ADDR
+              value: ':55000'
+          resources:
+            limits:
+              cpu: 50m
+              memory: 75Mi
+            requests:
+              cpu: 20m
+              memory: 25Mi
+

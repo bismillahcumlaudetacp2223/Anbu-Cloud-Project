@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: happy-order-svc
+  labels:
+    app: happy-order-svc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: happy-order-svc
+  template:
+    metadata:
+      labels:
+        app: happy-order-svc
+    spec:
+      containers:
+        - name: happy-order-svc
+          image: syahdaromstudenttelu/happy-order-svc
+          ports:
+            - containerPort: 55000
+          env:
+            - name: APP_ENV
+              value: 'prod'
+            - name: DB_DRIVER
+              value: 'mysql'
+            - name: DB_SOURCE
+              value: 'root:DdSmIMLTRZ@tcp(mysql.monitoring.svc.cluster.local:3306)/happy_mysql_db?parseTime=true'
+            - name: SERVER_ADDR
+              value: ':55000'
+          resources:
+            limits:
+              cpu: 50m
+              memory: 75Mi
+            requests:
+              cpu: 20m
+              memory: 25Mi

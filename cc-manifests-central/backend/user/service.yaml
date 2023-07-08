@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: happy-user-svc
+spec:
+  selector:
+    app: happy-user-svc
+  ports:
+    - protocol: TCP
+      port:  55000
+      targetPort: 55000
+  type: ClusterIP

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: happy-api-svc
+spec:
+  ports:
+  - port: 55000
+    protocol: TCP
+    targetPort: 55000
+  selector:
+    app: happy-api-svc
+  type: LoadBalancer
