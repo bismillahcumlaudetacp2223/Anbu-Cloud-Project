@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   ports:
-  - nodePort: 31792
+  - name: happy-web-admin
     port: 80
     protocol: TCP
     targetPort: 55000
