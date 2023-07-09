@@ -34,4 +34,4 @@ metadata:
           requests:
             cpu: 20m
             memory: 25Mi
-      restartPolicy: Alway
+      restartPolicy: Always
