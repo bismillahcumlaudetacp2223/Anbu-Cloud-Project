@@ -1,9 +1,14 @@
 # Scale Up GKE Node
 echo 'Starting Scale Up GKE Node Process ...'
 gcloud container clusters get-credentials cc-project-capstone --region us-central1 --project cc-capstone-ta
+gcloud container node-pools update app --cluster=cc-project-capstone --enable-autoprovisioning --zone=us-central1
 gcloud container clusters resize cc-project-capstone --num-nodes=3 --zone=us-central1
 echo 'Scale Up GKE Node Process, Done!'
 
+# Scale Patch HPA to 1
+echo 'Starting Patch HPA to 0 ...'
+kubectl scale hpa --current-replicas=0 --replicas=1 --namespace=my-namespace
+echo 'Patch HPA, Done!'
 
 # Patch PDB to 1
 echo 'Starting Patch PDB to 1 ...'
