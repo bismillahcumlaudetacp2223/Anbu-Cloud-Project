@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: frontend-virtualservice
+  namespace: istio-system
+spec:
+  gateways:
+  - frontend-gateway
+  hosts:
+  - anbutech.xyz
+  http:
+  - route:
+    - destination:
+        host: happy-web-app-service.default.svc.cluster.local
+        port:
+          number: 80
