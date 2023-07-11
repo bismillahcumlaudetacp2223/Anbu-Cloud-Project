@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: prometheus-virtualservice
+  namespace: istio-system
+spec:
+  gateways:
+  - prometheus-gateway
+  hosts:
+  - prometheus.anbutech.xyz
+  http:
+  - route:
+    - destination:
+        host: anbu-kube-prometheus-stack-prometheus.anbu.svc.cluster.local
+        port:
+          number: 9090
